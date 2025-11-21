@@ -313,8 +313,8 @@ const App: React.FC = () => {
           <div className="flex-1 bg-stone-200 dark:bg-[#111] relative flex flex-col items-center justify-center transition-colors duration-500">
              
              {/* Game Controls */}
-             <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-start z-20">
-                 <div className="flex gap-2">
+             <div className="absolute top-0 left-0 right-0 p-2 sm:p-4 flex justify-between items-start z-20">
+                 <div className="flex gap-1 sm:gap-2">
                     <button onClick={exitGame} className="text-stone-400 hover:text-red-500 transition-colors p-2" title="Exit to Menu">
                         <LogOut size={20} />
                     </button>
@@ -327,25 +327,25 @@ const App: React.FC = () => {
                  </button>
              </div>
 
-             <div className="absolute top-6 text-xs font-bold text-stone-400 dark:text-stone-700 uppercase tracking-widest">Opponent</div>
+             <div className="absolute top-4 sm:top-6 text-[10px] sm:text-xs font-bold text-stone-400 dark:text-stone-700 uppercase tracking-widest">Opponent</div>
              
-             <div className="flex items-center gap-4">
-                <div className={`text-6xl font-black ${botQi >= 5 ? 'text-orange-600 dark:text-orange-500 animate-pulse' : 'text-stone-900 dark:text-white'}`}>
+             <div className="flex items-center gap-3 sm:gap-4 mt-20 sm:mt-24">
+                <div className={`text-4xl sm:text-6xl font-black ${botQi >= 5 ? 'text-orange-600 dark:text-orange-500 animate-pulse' : 'text-stone-900 dark:text-white'}`}>
                     {botQi}
                 </div>
-                <span className="text-xs text-stone-400 dark:text-stone-600 font-bold tracking-widest">QI</span>
+                <span className="text-[10px] sm:text-xs text-stone-400 dark:text-stone-600 font-bold tracking-widest">QI</span>
              </div>
 
              {/* Bot Action Reveal */}
-             <div className="mt-8 h-32 flex items-center justify-center">
+             <div className="mt-12 sm:mt-16 h-24 sm:h-32 flex items-center justify-center">
                 {phase === 'RESOLVING' && botMove ? (
                     <div className="text-center animate-in zoom-in duration-300">
-                        <div className="text-8xl mb-4">{MOVES[botMove].gesture.split(' ')[0]}</div>
-                        <div className="text-2xl font-black text-orange-600 dark:text-orange-500 uppercase tracking-widest">{MOVES[botMove].name}</div>
+                        <div className="text-6xl sm:text-8xl mb-2 sm:mb-4">{MOVES[botMove].gesture.split(' ')[0]}</div>
+                        <div className="text-lg sm:text-2xl font-black text-orange-600 dark:text-orange-500 uppercase tracking-widest">{MOVES[botMove].name}</div>
                     </div>
                 ) : (
-                    <div className="w-24 h-24 border-4 border-stone-300 dark:border-stone-800/50 rounded-full flex items-center justify-center">
-                        <div className="w-2 h-2 bg-stone-400 dark:bg-stone-800 rounded-full animate-ping" />
+                    <div className="w-16 h-16 sm:w-24 sm:h-24 border-4 border-stone-300 dark:border-stone-800/50 rounded-full flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-stone-400 dark:bg-stone-800 rounded-full animate-ping" />
                     </div>
                 )}
              </div>
@@ -353,24 +353,24 @@ const App: React.FC = () => {
 
           {/* MIDDLE: TIMELINE / FEEDBACK */}
           <div className="relative w-full z-30">
-            <div className="h-2 bg-stone-300 dark:bg-stone-900 w-full">
+            <div className="h-1 sm:h-2 bg-stone-300 dark:bg-stone-900 w-full">
                 <div 
                     className={`h-full transition-all duration-75 ease-linear ${timeLeft < 1000 ? 'bg-red-600' : 'bg-stone-900 dark:bg-white'}`} 
                     style={{ width: `${getTimerProgress()}%`, display: phase === 'RESOLVING' ? 'none' : 'block' }} 
                 />
             </div>
 
-            {/* Unified Height Bar (h-14) to prevent layout shift */}
+            {/* Unified Height Bar (h-10 mobile, h-14 desktop) to prevent layout shift */}
             {phase === 'RESOLVING' ? (
-                 <div className={`h-14 flex items-center justify-center ${feedback.color} shadow-lg animate-in slide-in-from-top-2 duration-300`}>
-                    <span className={`text-lg font-bold uppercase tracking-widest ${feedback.textColor} text-center px-4 drop-shadow-md`}>
+                 <div className={`h-10 sm:h-14 flex items-center justify-center ${feedback.color} shadow-lg animate-in slide-in-from-top-2 duration-300`}>
+                    <span className={`text-sm sm:text-lg font-bold uppercase tracking-widest ${feedback.textColor} text-center px-4 drop-shadow-md`}>
                         {feedback.text}
                     </span>
                  </div>
             ) : (
                 /* Standard Status Bar */
-                 <div className="h-14 flex items-center justify-center bg-stone-100 dark:bg-[#0c0c0c] border-b border-stone-200 dark:border-stone-900 shrink-0">
-                     <span className={`text-lg font-bold tracking-widest ${timeLeft < 1000 ? 'text-red-600 dark:text-red-500 animate-pulse' : 'text-stone-400 dark:text-stone-500'}`}>
+                 <div className="h-10 sm:h-14 flex items-center justify-center bg-stone-100 dark:bg-[#0c0c0c] border-b border-stone-200 dark:border-stone-900 shrink-0">
+                     <span className={`text-sm sm:text-lg font-bold tracking-widest ${timeLeft < 1000 ? 'text-red-600 dark:text-red-500 animate-pulse' : 'text-stone-400 dark:text-stone-500'}`}>
                         {timeLeft < 1000 ? 'LOCK IN' : 'CHOOSE ACTION'}
                      </span>
                  </div>
@@ -379,17 +379,17 @@ const App: React.FC = () => {
 
 
           {/* BOTTOM: PLAYER CONTROLS */}
-          <div className="flex-[2] p-4 sm:p-6 bg-stone-100 dark:bg-[#0c0c0c] flex flex-col gap-4 sm:gap-6 min-h-0">
-             <div className="flex justify-between items-end border-b border-stone-200 dark:border-stone-900 pb-2 shrink-0">
-                <div className="text-xs font-bold text-stone-400 dark:text-stone-700 uppercase tracking-widest">You</div>
-                <div className="flex items-baseline gap-3">
-                    <span className="text-xs text-stone-400 dark:text-stone-600 font-bold tracking-widest">QI</span>
-                    <span className="text-5xl font-black text-stone-900 dark:text-white leading-none">{playerQi}</span>
+          <div className="flex-[2] px-2 pb-2 pt-12 sm:px-6 sm:pb-6 sm:pt-14 bg-stone-100 dark:bg-[#0c0c0c] flex flex-col gap-5 sm:gap-6 min-h-0">
+             <div className="flex justify-between items-end border-b border-stone-200 dark:border-stone-900 pb-5 shrink-0">
+                <div className="text-[10px] sm:text-xs font-bold text-stone-400 dark:text-stone-700 uppercase tracking-widest">You</div>
+                <div className="flex items-baseline gap-2 sm:gap-3">
+                    <span className="text-[10px] sm:text-xs text-stone-400 dark:text-stone-600 font-bold tracking-widest">QI</span>
+                    <span className="text-3xl sm:text-5xl font-black text-stone-900 dark:text-white leading-none">{playerQi}</span>
                 </div>
              </div>
 
              {/* Move Grid */}
-             <div className="grid grid-cols-4 gap-2 sm:gap-3 h-full pb-safe">
+             <div className="grid grid-cols-4 gap-1 sm:gap-3 h-full pb-safe">
                 {/* Row 1 */}
                 <MoveButton moveType={MoveType.COLLECT_QI} currentQi={playerQi} onClick={setPlayerMove} disabled={phase !== 'PLANNING' || isPaused || countdown !== null} selected={playerMove === MoveType.COLLECT_QI} />
                 <MoveButton moveType={MoveType.BLOCK} currentQi={playerQi} onClick={setPlayerMove} disabled={phase !== 'PLANNING' || isPaused || countdown !== null} selected={playerMove === MoveType.BLOCK} />

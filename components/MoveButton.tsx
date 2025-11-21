@@ -22,12 +22,6 @@ export const MoveButton: React.FC<Props> = ({ moveType, currentQi, onClick, disa
   let activeClass = "hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-black dark:hover:text-white hover:border-stone-400 dark:hover:border-stone-500";
   let selectedClass = "bg-stone-800 dark:bg-stone-200 text-white dark:text-black border-stone-900 dark:border-white ring-1 ring-stone-900 dark:ring-white transform scale-[0.98]";
 
-  // Type coloring subtle hints on hover
-  if (move.type === 'attack') {
-      // Keep base class but add specific hover border
-      // activeClass handled by conditional combination below implies standard hover logic
-  }
-
   if (!affordable) {
       bgClass = "bg-stone-100 dark:bg-black text-stone-300 dark:text-stone-800 border-stone-200 dark:border-stone-900 opacity-60 dark:opacity-40";
       activeClass = "cursor-not-allowed";
@@ -52,28 +46,28 @@ export const MoveButton: React.FC<Props> = ({ moveType, currentQi, onClick, disa
       onClick={() => isClickable && onClick(moveType)}
       disabled={!isClickable}
       className={`
-        relative flex flex-col border-2 transition-all duration-150 rounded-lg p-2
+        relative flex flex-col border-2 transition-all duration-150 rounded-lg p-1 sm:p-2
         ${selected ? selectedClass : `${bgClass} ${isClickable ? activeClass : ''}`}
         ${isClickable ? 'active:scale-95' : ''}
       `}
     >
       {/* Top Right: Cost */}
-      <div className="w-full flex justify-end mb-1">
-        <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${badgeColor}`}>
+      <div className="w-full flex justify-end mb-0.5 sm:mb-1">
+        <span className={`text-[10px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded ${badgeColor}`}>
             {badgeContent}
         </span>
       </div>
 
       {/* Center: Icon/Gesture */}
-      <div className="flex-1 flex items-center justify-center py-1 overflow-visible">
-        <div className="text-4xl sm:text-5xl select-none transform transition-transform group-hover:scale-110 filter drop-shadow-sm dark:drop-shadow-lg">
+      <div className="flex-1 flex items-center justify-center overflow-visible">
+        <div className="text-2xl sm:text-5xl select-none transform transition-transform group-hover:scale-110 filter drop-shadow-sm dark:drop-shadow-lg leading-none">
             {move.gesture.split(' ')[0]} 
         </div>
       </div>
 
       {/* Bottom: Name */}
-      <div className="mt-2 text-center z-10">
-        <span className={`block text-sm sm:text-base font-black uppercase tracking-wide ${selected ? 'text-white dark:text-black' : 'text-stone-800 dark:text-white'}`}>
+      <div className="mt-1 sm:mt-2 text-center z-10">
+        <span className={`block text-[10px] sm:text-base font-black uppercase tracking-wide leading-tight ${selected ? 'text-white dark:text-black' : 'text-stone-800 dark:text-white'}`}>
             {move.name}
         </span>
       </div>
